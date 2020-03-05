@@ -19,6 +19,7 @@ export class EmployeeEditComponent implements OnInit {
   @ViewChild('editSurname') editSurNameRef: ElementRef;
   @ViewChild('editAge') editAgeRef: ElementRef;
 
+  @Output() editStateChanged = new EventEmitter<undefined>();
 
   ngOnInit(): void {
   }
@@ -33,5 +34,10 @@ export class EmployeeEditComponent implements OnInit {
 
 
     this.employeeEdited.emit(editedEmployee);
+  }
+
+  changeEditState() {
+
+    this.editStateChanged.emit();
   }
 }

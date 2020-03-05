@@ -19,6 +19,8 @@ export class EmployeeAddComponent implements OnInit {
   @ViewChild('ageInput') ageInputRef: ElementRef;
   @Output() employAdded = new EventEmitter<Employee>();
 
+  @Output() addStateChanged = new EventEmitter<undefined>();
+
   constructor() {
   }
 
@@ -32,5 +34,10 @@ export class EmployeeAddComponent implements OnInit {
     const empAge = this.ageInputRef.nativeElement.value;
     const newEmploy = new Employee(this.autoincrement, empName, empSur, empAge);
     this.employAdded.emit(newEmploy);
+  }
+
+  changeAddState() {
+
+    this.addStateChanged.emit();
   }
 }

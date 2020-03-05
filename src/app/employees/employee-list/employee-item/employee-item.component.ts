@@ -1,27 +1,44 @@
-import { Component, OnInit, Input, Output } from '@angular/core';
-import { Employee } from '../../employee.model';
-import { EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output } from "@angular/core";
+import { Employee } from "../../employee.model";
+import { EventEmitter } from "@angular/core";
 
 @Component({
-  selector: 'app-employee-item',
-  templateUrl: './employee-item.component.html',
-  styleUrls: ['./employee-item.component.scss']
+  selector: "app-employee-item",
+  templateUrl: "./employee-item.component.html",
+  styleUrls: ["./employee-item.component.scss"]
 })
 export class EmployeeItemComponent implements OnInit {
+  @Input() employees: Employee[];
+  @Input() empitem: Employee;
+  @Output() EmployeeSelected = new EventEmitter<Employee>();
+  searchVal: string;
+  searchItems: Employee[];
 
-  @Input() emp: Employee;
-  @Output() EmployeeSelected = new EventEmitter<void>();
-
-
-  constructor() { }
+  constructor() {}
 
   ngOnInit(): void {
+    this.searchVal = "";
+    this.functionIfInclude();
   }
 
-  SelectedEmployee() {
-    this.EmployeeSelected.emit();
+  functionIfInclude() {
+    this.searchItems = this.employees.filter(
+      item =>
+        item.surname
+          .toLocaleUpperCase()
+          .includes(this.searchVal.toLocaleUpperCase()) ||
+        item.name
+          .toLocaleUpperCase()
+          .includes(this.searchVal.toLocaleUpperCase())
+    );
+    return true;
   }
 
+  onSearchEmployee(value: string) {
+    this.searchVal = value;
+  }
 
-
+  SelectedEmployee(empitem: Employee) {
+    this.EmployeeSelected.emit(empitem);
+  }
 }

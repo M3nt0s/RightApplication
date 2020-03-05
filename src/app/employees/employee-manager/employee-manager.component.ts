@@ -1,14 +1,13 @@
-import { Component, OnInit, Input, Output } from '@angular/core';
-import { Employee } from '../employee.model';
-import { EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output } from "@angular/core";
+import { Employee } from "../employee.model";
+import { EventEmitter } from "@angular/core";
 
 @Component({
-  selector: 'app-employee-manager',
-  templateUrl: './employee-manager.component.html',
-  styleUrls: ['./employee-manager.component.scss']
+  selector: "app-employee-manager",
+  templateUrl: "./employee-manager.component.html",
+  styleUrls: ["./employee-manager.component.scss"]
 })
 export class EmployeeManagerComponent implements OnInit {
-
   isEditing: boolean;
   isAdding: boolean;
   isDeleting: boolean;
@@ -20,26 +19,48 @@ export class EmployeeManagerComponent implements OnInit {
 
   @Input() emp: Employee;
 
-
   constructor() {
     this.isAdding = false;
     this.isEditing = false;
+    this.isDeleting = false;
   }
 
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 
   toolbarAdd() {
     this.isAdding = !this.isAdding;
+
+    if (
+      (this.isAdding === true && this.isEditing === true) ||
+      this.isDeleting === true
+    ) {
+      this.isEditing = false;
+      this.isDeleting = false;
+    }
   }
 
   toolbarEdit() {
-     this.isEditing = !this.isEditing;
+    this.isEditing = !this.isEditing;
+
+    if (
+      (this.isEditing === true && this.isEditing === true) ||
+      this.isDeleting === true
+    ) {
+      this.isDeleting = false;
+      this.isAdding = false;
+    }
   }
 
   toolbarDelete() {
     this.isDeleting = !this.isDeleting;
+
+    if (
+      (this.isDeleting === true && this.isEditing === true) ||
+      this.isAdding === true
+    ) {
+      this.isEditing = false;
+      this.isAdding = false;
+    }
   }
 
   onEmployeeAdd(employee: Employee) {

@@ -1,0 +1,24 @@
+<div style="margin-top: 100px;">
+  <h1>Adding.</h1>
+
+  <input disabled class="form-control" type="text" placeholder="Id" style="margin-top: 20px;"
+    value="{{ autoincrement }}" /><br />
+
+  <p-dropdown #idEmployee filter="true" [options]="employeeItems" placeholder="Select employee." optionLabel="value"
+    [showClear]="false">
+  </p-dropdown>
+  <br><br>
+
+  <p-dropdown #idDevice filter="true" [options]="deviceItems" placeholder="Select device." optionLabel="value" [showClear]="false">
+  </p-dropdown>
+  <br><br>
+
+
+  <p-calendar required="true" #conDatee showSeconds="true" inline="true" placeholder="Set data." showTime="true"
+    selectionMode="range" [readonlyInput]="true"></p-calendar>
+  <br><br>
+
+  <button class="btn btn-success" type="reset" value="Add" (click)="onAddConnection()">Add</button>
+  <button class="btn btn-danger" (click)="changeAddState()">Cancel</button>
+
+</div>

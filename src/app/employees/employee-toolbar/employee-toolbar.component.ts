@@ -1,22 +1,20 @@
-import { Component, OnInit, Output, Input } from '@angular/core';
-import { EventEmitter } from '@angular/core';
-import { Employee } from '../employee.model';
+import { Component, OnInit, Output, Input } from "@angular/core";
+import { EventEmitter } from "@angular/core";
+import { Employee } from "../employee.model";
 
 @Component({
-  selector: 'app-employee-toolbar',
-  templateUrl: './employee-toolbar.component.html',
-  styleUrls: ['./employee-toolbar.component.scss']
+  selector: "app-employee-toolbar",
+  templateUrl: "./employee-toolbar.component.html",
+  styleUrls: ["./employee-toolbar.component.scss"]
 })
 export class EmployeeToolbarComponent implements OnInit {
-
   @Output() onToolbarAdd = new EventEmitter<undefined>();
   @Output() onToolbarEdit = new EventEmitter<undefined>();
   @Output() onToolbarDelete = new EventEmitter<undefined>();
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   addButton() {
     this.onToolbarAdd.emit();

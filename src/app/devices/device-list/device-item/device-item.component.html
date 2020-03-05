@@ -1,1 +1,11 @@
-<p>device-item works!</p>
+<input class="form-control" type="search" id="myInput" (keyup)="onSearchDevice(search.value)" placeholder="Search for devices." title="Type in..." #search>
+    <br>
+
+<div *ngIf="functionIfInclude()">
+<div *ngFor="let devitem of searchItems">
+  <a (click)='SelectedDevice(devitem)' href="#" class="list-group-item" onClick="return false;">
+    <h4>{{ devitem.mark}} {{ devitem.model }}</h4>
+  </a>
+</div>
+</div>
+

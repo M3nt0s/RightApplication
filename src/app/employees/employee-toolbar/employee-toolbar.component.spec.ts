@@ -8,9 +8,9 @@ describe('EmployeeToolbarComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ EmployeeToolbarComponent ]
+      declarations: [EmployeeToolbarComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

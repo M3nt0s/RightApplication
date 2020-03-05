@@ -1,6 +1,6 @@
-import { Component, OnInit, Output, Input } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { Employee } from "./employee.model";
-import { EventEmitter } from "@angular/core";
+
 
 @Component({
   selector: "app-employees",
@@ -15,35 +15,57 @@ export class EmployeesComponent implements OnInit {
   constructor() {
     this.autoincrement = 1;
     this.employees = [];
-    this.addEmployee(new Employee(this.autoincrement, 'Dominik', 'Latas', 21));
-    this.addEmployee(
-      new Employee(this.autoincrement, 'Norbert', 'Bankowski', 26)
-    );
-    this.addEmployee(new Employee(this.autoincrement, 'Pawel', 'Zacharz', 17));
   }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    this.storageFunction();
+  };
+
+  storageSave() {
+    localStorage.setItem("employees", JSON.stringify(this.employees));
+  }
+
+  storageFunction() {
+    var data = JSON.parse(localStorage.getItem("employees"));
+
+    // localStorage.removeItem('employees');
+    // localStorage.clear();
+
+    if (!(data === null)) {
+      for (var i = 0; i < data.length; i++) {
+
+        if ((i) === (data.length - 1)) {
+          this.autoincrement = +(data[data.length - 1].id);
+          this.autoincrement++;
+        }
+        this.employees.push(data[i]);
+      }
+    }
+  }
+
 
   addEmployee(employee: Employee) {
     this.employees.push(employee);
+    this.storageSave();
     this.autoincrement++;
   }
+
 
   editEmployee(employee: Employee) {
     const index = this.employees.findIndex(x => {
       return x.id == employee.id;
     });
-    console.log(employee.id);
     this.employees[index] = employee;
+    this.storageSave();
   }
 
   deleteEmployee(employee: Employee) {
-
     const indexx = this.employees.findIndex(x => {
       return x.id == employee.id;
     });
     if (indexx > -1) {
       this.employees.splice(indexx, 1);
     }
+    this.storageSave();
   }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, Input } from '@angular/core';
+import { Component, OnInit, Output, Input, ViewChild, ElementRef } from '@angular/core';
 import { Employee } from '../employee.model';
 import { EventEmitter } from '@angular/core';
 
@@ -11,9 +11,10 @@ import { EventEmitter } from '@angular/core';
 
 export class EmployeeListComponent implements OnInit {
   title: string;
+  empitem: Employee;
 
-  @Output() EmployeeWasSelected = new EventEmitter<Employee>();
   @Input() employees: Employee[];
+  @Output() EmployeeWasSelected = new EventEmitter<Employee>();
 
   SelectedEmployee: Employee;
 

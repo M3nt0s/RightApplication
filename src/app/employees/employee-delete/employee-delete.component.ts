@@ -12,6 +12,7 @@ export class EmployeeDeleteComponent implements OnInit {
 
   @Input() emp: Employee;
   @Output() employeeDeleted = new EventEmitter<Employee>();
+  @Output() deleteStateChanged = new EventEmitter<undefined>();
 
   @ViewChild('editId2') editIdRef2: ElementRef;
   @ViewChild('editName2') editNameRef2: ElementRef;
@@ -32,5 +33,9 @@ export class EmployeeDeleteComponent implements OnInit {
     const editedEmployee2 = new Employee(editId2, editName2, editSurName2, editAge2);
 
     this.employeeDeleted.emit(editedEmployee2);
+  }
+
+  changeDeleteState() {
+    this.deleteStateChanged.emit();
   }
 }
