@@ -27,14 +27,6 @@ export class DevicesComponent implements OnInit {
   storageFunction() {
     var data = JSON.parse(localStorage.getItem("devices"));
 
-    // localStorage.removeItem('employees');
-    // localStorage.clear();
-
-    // if (data === null) {
-    // this.addDevice(new Device(this.autoincrement, 'HP', '3550', 'Printer'));
-    // this.addDevice(new Device(this.autoincrement, 'Acer', 'Nitro N211453', 'Monitor'));
-    // }
-
     if (!(data === null)) {
       for (var i = 0; i < data.length; i++) {
         if (i === data.length - 1) {

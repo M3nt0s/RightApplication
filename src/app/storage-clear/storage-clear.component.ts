@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { faPowerOff } from '@fortawesome/free-solid-svg-icons';
+import { faPowerOff } from "@fortawesome/free-solid-svg-icons";
 
 @Component({
   selector: "app-storage-clear",
@@ -13,7 +13,12 @@ export class StorageClearComponent implements OnInit {
   ngOnInit(): void {}
 
   storageFree() {
-    localStorage.clear();
-    location.reload();
+    const retVal = confirm("Delete all local data ?");
+    if (retVal === true) {
+      localStorage.clear();
+      location.reload();
+    } else {
+      return false;
+    }
   }
 }

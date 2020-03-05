@@ -1,19 +1,25 @@
-import { Component, OnInit, Input, Output, ViewChild, ElementRef } from '@angular/core';
-import { Connection } from '../connection.model';
-import { EventEmitter } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Input,
+  Output,
+  ViewChild,
+  ElementRef
+} from "@angular/core";
+import { Connection } from "../connection.model";
+import { EventEmitter } from "@angular/core";
 import { Device } from "src/app/devices/device.model";
 import { DeviceItem } from "src/app/devices/deviceselect.model";
 import { Employee } from "src/app/employees/employee.model";
 import { EmployeeItem } from "src/app/employees/employeeselect.model";
 
 @Component({
-  selector: 'app-connection-edit',
-  templateUrl: './connection-edit.component.html',
-  styleUrls: ['./connection-edit.component.scss']
+  selector: "app-connection-edit",
+  templateUrl: "./connection-edit.component.html",
+  styleUrls: ["./connection-edit.component.scss"]
 })
 export class ConnectionEditComponent implements OnInit {
-
-  constructor() { }
+  constructor() {}
 
   @Input() con: Connection;
 
@@ -31,9 +37,7 @@ export class ConnectionEditComponent implements OnInit {
   employeeItems: EmployeeItem[];
   deviceItems: DeviceItem[];
 
-
   ngOnInit(): void {
-
     this.employees = JSON.parse(localStorage.getItem("employees"));
     this.devices = JSON.parse(localStorage.getItem("devices"));
 
@@ -52,14 +56,16 @@ export class ConnectionEditComponent implements OnInit {
     const employee = (<any>this.emplElement).value;
     const device = (<any>this.devElement).value;
     const date = (<any>this.datElement).value;
-    const editedConnection = new Connection(editId, employee.id, device.id, date);
+    const editedConnection = new Connection(
+      editId,
+      employee.id,
+      device.id,
+      date
+    );
     this.connectionEdited.emit(editedConnection);
   }
 
-
-
   changeEditState() {
-
     this.editStateChanged.emit();
   }
 }
