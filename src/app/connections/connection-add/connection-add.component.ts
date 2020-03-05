@@ -46,7 +46,7 @@ export class ConnectionAddComponent implements OnInit {
     });
 
     this.deviceItems = this.devices.map(item => {
-      return { ...item, value: `${item.mark} ${item.model}` };
+      return { ...item, value: `${item.mark} ${item.model} -  ${item.type}` };
     });
   }
 
